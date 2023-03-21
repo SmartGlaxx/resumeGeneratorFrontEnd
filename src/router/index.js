@@ -14,41 +14,63 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      component: HomeView,
+      meta: {
+        showHeader: true
+      }
     },
     {
       path: '/sign-up',
       name: 'signUp',
-      component: SignUpView
+      component: SignUpView,
+      meta: {
+        showHeader: false
+      }
     },
     {
       path: '/sign-in',
       name: 'signIn',
-      component: SignInView
+      component: SignInView,
+      meta: {
+        showHeader: false
+      }
     },
     {
       path: '/create-resume',
       name: 'createResume',
-      component: CreateResume
+      component: CreateResume,
+      meta: {
+        showHeader: true
+      }
     },
     {
       path: '/my-resumes',
       name: 'myResumes',
-      component: MyResumes
+      component: MyResumes,
+      meta: {
+        showHeader: true
+      }
     },
     {
       path: '/my-resumes/:resumeId',
       name: 'myResume',
       component: MyResume,
-      props: true
+      props: true,
+      meta: {
+        showHeader: true
+      }
     },
     {
       path: '/my-resumes/:resumeId/edit',
       name: 'myResumeEditor',
       component: MyResumeEditor,
-      props: true
+      props: true,
+      meta: {
+        showHeader: true
+      }
     }
   ]
 })
+
 
 export default router

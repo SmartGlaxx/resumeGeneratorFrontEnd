@@ -5,80 +5,71 @@
       <form>
         <table>
             <tr>
-                <td><h4>Personal Information</h4></td>
+                <td><h5>Personal Information</h5></td>
             </tr>
+            <td></td>
             <tr>
-                <!-- <td>
-                    <label for="full-name">First Name:</label>
-                </td> -->
                 <td>
-                    <input type="text" id="full-name" 
-                    v-model="firstName" required placeholder="Firstname"><br><br>
+                    <input type="text" v-model="firstName" required placeholder="Firstname">
+                </td>
+                <td>
+                    <input type="text" v-model="lastName" required placeholder="Lastname">
                 </td>
             </tr>
             <tr>
-                <!-- <td>
-                    <label for="full-name">Last Name:</label>
-                </td> -->
                 <td>
-                    <input type="text" id="full-name" 
-                    v-model="lastName" required placeholder="Lastname"><br><br>
+                    <input type="email" v-model="userEmail" required placeholder=userEmail disabled>
+                </td>
+                <td>
+                    <input type="tel" v-model="phone" required placeholder="Phone">
                 </td>
             </tr>
             <tr>
-                <!-- <td>
-                    <label for="email">Email:</label>
-                </td> -->
                 <td>
-                    <input type="email" id="email" name="email" 
-                    v-model="userEmail" required placeholder=userEmail disabled><br><br>
+                    <input type="text" id="address" name="address"
+                    v-model="address" required placeholder="Address"><br><br>
                 </td>
+                <td>
+                    <textarea v-model="intro" placeholder="Personal Summary" rows="4" cols="35"></textarea>
+                 </td>
             </tr>
             <tr>
-                <!-- <td>
-                    <label for="phone">Phone:</label>
-                </td> -->
-                <td>
-                    <input type="tel" id="phone" name="phone"
-                    v-model="phone" required placeholder="778 1234 567"><br><br>
-                </td>
+                <td><h5>Work Experince</h5></td><td></td>
             </tr>
-            <tr>
-                <td><h4>Education</h4></td>
-            </tr>
-            <tr><div v-for="(experience, index) in experiences" :key="index">
-                <tr><td><input type="text" v-model="experience.title" placeholder="Title" /></td></tr>
-                <tr><td><input type="text" v-model="experience.company" placeholder="Company" /></td></tr>
-                <tr><td><input type="text" v-model="experience.date" placeholder="Date" /></td></tr>
-                <tr><td><textarea v-model="experience.tasks" placeholder="Task description" rows="4" cols="50"></textarea></td></tr>
-                <tr><td><button @click.prevent="removeExperience(index)">Remove</button></td></tr>
-              </div>
-              <tr><td><button @click.prevent="addExperience">Add Experience</button></td></tr>
-              </tr>   
-              <tr><div v-for="(education, index) in educations" :key="index">
+            <div  v-for="(experience, index) in experiences" :key="index">
+                    <td><input type="text" v-model="experience.title" placeholder="Title" /></td><br/>
+                    <td><input type="text" v-model="experience.company" placeholder="Company" /></td><br/>
+                    <td><input type="text" v-model="experience.date" placeholder="Date" /></td><br/>
+                    <td><textarea v-model="experience.tasks" placeholder="Task description" rows="4" cols="35"></textarea></td><br/>
+                    <td><button @click.prevent="removeExperience(index)">Remove Experience</button></td>
+                    <td><button @click.prevent="addExperience">Add Experience</button></td>  
+            </div> 
+              <tr>
+                <td><h5>Education</h5></td><td></td>
+                </tr>
+              <!-- <tr><div v-for="(education, index) in educations" :key="index">
                 <tr><td><input type="text" v-model="education.school" placeholder="School" /></td></tr>
                 <tr><td><input type="text" v-model="education.date" placeholder="Date" /></td></tr>
                 <tr><td><input type="text" v-model="education.course" placeholder="Field of Study" /></td></tr>
                 <tr><td><button @click.prevent="removeEducation(index)">Remove</button></td></tr>
               </div>
               <tr><td><button @click.prevent="addEducation">Add Education</button></td></tr>
-              </tr>
-              <!-- <button type="submit" @click.prevent="submitResume">Create Resume</button> -->
-            
+              </tr> -->
+              
+              <div  v-for="(education, index) in educations" :key="index">
+                <td><input type="text" v-model="education.school" placeholder="School" /></td><br/>
+                <td><input type="text" v-model="education.date" placeholder="Date" /></td><br/>
+                <td><input type="text" v-model="education.course" placeholder="Course" /></td><br/>
+                <td><button @click.prevent="removeEducation(index)">Remove Education</button></td>
+                <td><button @click.prevent="addEducation">Add Education</button></td>  
+            </div> 
             
             <tr>
-                <td><h4>Skills</h4></td>
+                <td><h5>Skills</h5></td>
             </tr>
             <tr>
-                <!-- <td>
-                    <label for="skills">Skills:</label>
-                </td> -->
-                <!-- <td>
-                    <textarea id="skills" 
-                    v-model="skills" required placeholder=""></textarea><br><br>
-                </td> -->
                 <label for="skill">Add skill:</label>
-                <input type="text" id="skill" v-model="newSkill">
+                <input type="text" id="skill" v-model="newSkill" placeholder="Skill">
                 <button @click.prevent="addSkill">Add</button>
                 <ul>
                     <li v-for="skill in skills" :key="skill">
@@ -88,10 +79,9 @@
                   </ul>
                 </tr>
                 <tr>
-                    <td></td>
-                    <td>
-                        <button type="submit" @click.prevent="createResume">CREATE RESUME</button>
-                    </td>
+                <td>
+                    <button type="submit" @click.prevent="createResume">CREATE RESUME</button>
+                </td>
                 </tr>
         </table>
       </form>
@@ -106,25 +96,26 @@
   
   <script>
   import UserResume from "../services/UserResume"
-  
+//   import Vue from 'vue';
+
   export default {
     data() {
       return {
         experiences: [{ title: '', company: '', date: '', description: '' }],
         educations: [{ school: '', date: '', field: '' }],
         skills : [],
-        userId : "1",
         firstName : "",
         lastName : "",
         email : "",
-        address : " ",
-        phone : " ",
+        address : "",
+        phone : "",
         intro : "",
         experience : "",
         education : "",
         newSkill: "",
         isLoggedIn: false,
-        userEmail: sessionStorage.getItem('userEmail')
+        userEmail: sessionStorage.getItem('userEmail'),
+        pageReloaded: false
       }
     },
     methods:{
@@ -172,10 +163,19 @@
     },
     created(){
         if (sessionStorage.getItem('userEmail')) {
-        this.isLoggedIn = true;
-        this.userEmail = sessionStorage.getItem('userEmail')
-    }
-    }
+            this.isLoggedIn = true;
+            this.userEmail = sessionStorage.getItem('userEmail')
+        }
+    },
+   
+//     mounted() {
+//         if (!this.$root.pageReloaded) {
+//         setTimeout(() => {
+//         window.location.reload();
+//         }, 1000);
+//         this.pageReloaded = true;
+//   }
+//     }
   };
   </script>
   
@@ -187,19 +187,35 @@
     padding-bottom: 5rem;
   }
   input{
+    width: 20rem;
     background: none;
     color: #ddd;
+    margin: 0.5rem 0;
     padding: 0.5rem 1rem;
     box-sizing: content-box;
     border-radius: 0.6rem;
     font-size: 1.2rem
   }
-  input[type="submit"]{
-   float: right;
-   font-size: 1rem;
+  button[type="submit"]{
+   margin-top: 2rem;
   }
-  h4{
+  textarea{
+    background: none;
+    color: #ddd;
+    margin: 0.5rem 0;
+    padding: 0.5rem 1rem;
+    box-sizing: content-box;
+    border-radius: 0.6rem;
+    font-size: 1.2rem
+  }
+  h5{
     margin-top: 2rem
+  }
+  button{
+    padding: 0.4rem;
+    border-radius: 0.5rem;
+    color: #ddd;
+    background: linear-gradient(123deg, rgb(64, 93, 101),rgb(45, 84, 96));
   }
   </style>
   

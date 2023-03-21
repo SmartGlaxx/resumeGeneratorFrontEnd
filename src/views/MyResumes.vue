@@ -7,7 +7,8 @@
           <h4 class="name">{{ resume.firstName }} {{ resume.lastName }}</h4>
           <div class="address"><span>{{ resume.email }} </span> | <span> {{resume.phone}}</span> | <span>{{resume.address}}</span></div>
           <div class="details-btn">
-            <a :href="`/my-resumes/${resume.id}`">View</a>
+            <a :href="`/my-resumes/${resume.id}`"><button class="view">View</button></a>
+            <button @click="deleteResume(resume.id)" class="delete">Delete</button>
           </div>
           <section>
             <h6>Personal Summary</h6>
@@ -54,6 +55,19 @@ import UserResume from '../services/UserResume';
         userEmail: sessionStorage.getItem('userEmail')
       }
     },
+    methods:{
+      deleteResume(resumeId) {
+            if (window.confirm("Are you sure you want to delete this resume?")) {
+                UserResume.deleteUserResume(resumeId, this.$router)
+            }
+            // const resumeIndex = this.resumes.findIndex(resume => resume.id === resumeId)
+
+            // if (resumeIndex !== -1) {
+            //   this.resumes.splice(resumeIndex, 1)
+            // }
+            window.location.reload()
+        },
+    },
     mounted() {
         const resumes = UserResume.getResumes()
         .then(response =>{
@@ -73,7 +87,7 @@ import UserResume from '../services/UserResume';
   }
   </script>
   
-<style>
+<style scoped>
 .resumes {
     list-style-type: none;
     margin: 4rem;
@@ -121,6 +135,21 @@ import UserResume from '../services/UserResume';
     .details-btn a{
       float:right;
       color: red
+    }
+    
+    .delete{
+      border: none;
+      padding: 0.4rem;
+      border-radius: 0.5rem;
+      color: #ddd;
+      background: linear-gradient(123deg, rgb(183, 101, 29),rgb(152, 49, 49));
+    }
+    .view{
+      border: none;
+      padding: 0.4rem;
+      border-radius: 0.5rem;
+      color: #ddd;
+      background: linear-gradient(123deg, rgb(64, 93, 101),rgb(45, 84, 96));
     }
    
 </style>

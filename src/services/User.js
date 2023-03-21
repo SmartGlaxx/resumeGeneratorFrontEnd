@@ -35,7 +35,7 @@ class User{
             sessionStorage.setItem("userEmail", user.email);
             sessionStorage.setItem("isLoggedIn", true);
             router.push('/create-resume');
-            window.location.reload()
+        
           }else{
             alert("Error logging in")
           }

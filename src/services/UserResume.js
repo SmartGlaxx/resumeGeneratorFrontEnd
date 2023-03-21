@@ -8,13 +8,13 @@ const USER_RESUME_DELETE_URL = `http://localhost:8080/resumes/delete/${sessionSt
 
 class UserResume{
     getUserData(){
-        axios.get(USER_RESUME_LIST_URL)
-        .then(response =>{
-            alert("Fetched resume")
-        }).catch(error =>{
-            alert("Error fetching resume")
-        })
-    }
+            axios.get(USER_RESUME_LIST_URL)
+            .then(response =>{
+                alert("Fetched resume")
+            }).catch(error =>{
+                alert("Error fetching resume")
+            })
+         }
     
 
     createNewResume(userId, firstName, lastName, email, 
@@ -71,8 +71,16 @@ class UserResume{
         });
     }
 
-    deleteUserResume(resumeId){
-        return axios.delete(`${USER_RESUME_DELETE_URL}/resumeId`)
+    deleteUserResume(resumeId, router){
+        axios.delete(`${USER_RESUME_DELETE_URL}/${resumeId}`)
+        .then(response =>{
+            if (response.status == 200) {
+                this.deleteMessage = response.data
+            }
+        })
+        .catch(error =>{
+            console.log("Error")
+        })
     }
 
 }

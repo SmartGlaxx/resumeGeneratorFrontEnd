@@ -11,7 +11,7 @@ const handleStore = useAppStore()
 <template>
   <main>
   <header>
-    <div class="desktop-nav" >
+    <div class="desktop-nav" v-if="showHeader">
       <ul >
         <li class="title1" style="font-size:2rem"><RouterLink to="/" class="link">Quick Resume</RouterLink></li>
         <div class="auth-btn" v-if="isLoggedIn">
@@ -28,6 +28,9 @@ const handleStore = useAppStore()
         <li><RouterLink to="/sign-up" class="link">Sign up</RouterLink></li>
         <li><RouterLink to="/sign-in" class="link">Sign in</RouterLink></li>
     </div>
+    </div>
+    <div v-else>
+      ANORTHER HEADER
     </div>
     <div class="mobile-nav">
       <div class="title2">Quick Resume</div>
@@ -77,7 +80,13 @@ export default{
   },
   mounted(){
       this.reloadPage()
+  },
+  computed: {
+    showHeader() {
+      const currentRoute = this.$route
+      return currentRoute.meta.showHeader
     }
+  }
 }
 </script>
 

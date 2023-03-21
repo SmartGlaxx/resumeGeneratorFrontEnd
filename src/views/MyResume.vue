@@ -2,17 +2,21 @@
     <main >
       <h1>My Resume</h1>
       <div v-if="isLoggedIn">
+        <div v-if="loading">
+            LOADING
+        </div>
+        <div v-else>
       <div class="resume">
         <div class="resume-inner">
         <!-- <li v-for="resume in resumes" :key="resume.id" class="resume">  -->
           <h4 class="name">{{ resume.firstName }} {{ resume.lastName }}</h4>
           <div class="address"><span>{{ resume.email }} </span> | <span> {{resume.phone}}</span> | <span>{{resume.address}}</span></div>
           <div class="details-btn">
-            <a :href="`/my-resumes/${resume.id}/edit`">Edit</a>
-            <button @click="deleteResume">Delete</button>
+            <a :href="`/my-resumes/${resume.id}/edit`" class="edit">Edit</a>
+            <!-- <button @click="deleteResume(resumeId)">Delete</button> -->
           </div>
           <section>
-            <h6>Personal Summary {{ resumeId }}</h6>
+            <h6>Personal Summary</h6>
             <p>{{resume.intro}}</p>
           </section>
           <section>
@@ -39,6 +43,9 @@
         </div> 
       </div>
     </div>
+    
+        
+    </div>
       <div v-else>
         <h4>Please  <router-link to="/sign-up">create an account</router-link> or <router-link to="/sign-in">sign in</router-link> to create a resume</h4>
       </div>
@@ -60,28 +67,29 @@ import UserResume from '../services/UserResume';
       return {
         resume: {},
         isLoggedIn: false,
+        loading: false,
         userEmail: sessionStorage.getItem('userEmail'),
-        deleteMessage: ""
+        deleteMessage: "",
+        isDataDeleted: false
       }
     },
     methods:{
-        deleteResume(resumeId) {
-        if (window.confirm("Are you sure you want to delete this resume?")) {
-            UserResume.deleteUserResume(this.resumeId)
-            .then(response =>{
-                this.deleteMessage = response.data
-            })
-            .catch(error =>{
-                console.log("Error")
-            })
-        }
-        },
+        // deleteResume(resumeId) {
+        //     if (window.confirm("Are you sure you want to delete this resume?")) {
+        //         UserResume.deleteUserResume(resumeId, this.$router)
+        //     }
+        //     this.isDataDeleted = true
+        //     this.$router.push('/my-resumes')
+        //     // location.reload()
+        // },
     },
+   
     mounted() {
+        this.loading = true;
         const resume = UserResume.getResume(this.resumeId)
         .then(response =>{
-            this.resume = response.data
-            console.error("resume" + resume)
+            this.resume = response.data;
+            this.loading = false;
         })
         .catch(error => {
           console.error(error)
@@ -143,7 +151,14 @@ import UserResume from '../services/UserResume';
     }
     .details-btn a{
       float:right;
-      color: red
+      color: #ddd
+    }
+    .edit{
+        border: none;
+        padding: 0.4rem;
+        border-radius: 0.5rem;
+        color: #ddd;
+        background: linear-gradient(123deg, rgb(216, 156, 107),rgb(183, 121, 13));
     }
    
 </style>

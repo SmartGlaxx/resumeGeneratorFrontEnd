@@ -65,7 +65,13 @@ export default {
     },
    
   
-  }
+  },
+  // computed: {
+  //   showHeader() {
+  //     const currentRoute = this.$route
+  //     return currentRoute.meta.showHeader
+  //   }
+  // }
 };
 </script>
 
