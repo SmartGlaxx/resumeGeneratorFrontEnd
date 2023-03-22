@@ -6,69 +6,78 @@
       <form >
         <table>
             <tr>
-                <td><h4>Personal Information</h4></td>
+                <td><h5>Personal Information</h5></td>
             </tr>
             <tr>
-                <!-- <td>
-                    <label for="full-name">First Name:</label>
-                </td> -->
                 <td>
-                    <input type="text" id="full-name" 
-                    v-model="resume.firstName" required placeholder="firstName"><br><br>
+                    <input type="text" v-model="this.firstName" required placeholder="FirstName"><br><br>
+                </td>
+                <td>
+                    <input type="text" v-model="this.lastName" required placeholder="Lastname"><br><br>
                 </td>
             </tr>
             <tr>
-                <!-- <td>
-                    <label for="full-name">Last Name:</label>
-                </td> -->
                 <td>
-                    <input type="text" id="full-name" 
-                    v-model="resume.lastName" required placeholder="Lastname"><br><br>
+                    <input type="email" v-model="userEmail" required placeholder=userEmail disabled><br><br>
+                </td>
+                <td>
+                    <input type="tel" v-model="this.phone" required placeholder="778 1234 567"><br><br>
                 </td>
             </tr>
             <tr>
-                <!-- <td>
-                    <label for="email">Email:</label>
-                </td> -->
-                <td>
-                    <input type="email" id="email" name="email" 
-                    v-model="userEmail" required placeholder=userEmail disabled><br><br>
-                </td>
+              <td>
+                  <input type="text" v-model="this.address" required placeholder="Address"><br><br>
+              </td>
+              <td>
+                  <textarea v-model="this.intro" placeholder="Personal Summary" rows="4" cols="35"></textarea>
+               </td>
             </tr>
             <tr>
-                <!-- <td>
-                    <label for="phone">Phone:</label>
-                </td> -->
-                <td>
-                    <input type="tel" id="phone" name="phone"
-                    v-model="resume.phone" required placeholder="778 1234 567"><br><br>
-                </td>
+                <td><h5>Work Experience</h5></td>
             </tr>
-            <tr>
-                <td><h4>Education</h4></td>
-            </tr>
-            <tr><div v-for="(experience, index) in this.experiences" :key="index">
+            <div  v-for="(experience, index) in this.experiences" :key="index">
+              <td><input type="text" v-model="experience.title" placeholder="Title" /></td><br/>
+              <td><input type="text" v-model="experience.company" placeholder="Company" /></td><br/>
+              <td><input type="text" v-model="experience.date" placeholder="Date" /></td><br/>
+              <td><textarea v-model="experience.tasks" placeholder="Task description" rows="4" cols="35"></textarea></td><br/>
+              <td><button @click.prevent="removeExperience(index)">Remove Experience</button></td>
+              <td><button @click.prevent="addExperience">Add Experience</button></td>  
+          </div> 
+
+            <!-- <tr> -->
+              <!-- <div v-for="(experience, index) in this.experiences" :key="index">
                 <tr><td><input type="text" v-model="experience.title" placeholder="Title" /></td></tr>
                 <tr><td><input type="text" v-model="experience.company" placeholder="Company" /></td></tr>
                 <tr><td><input type="text" v-model="experience.date" placeholder="Date" /></td></tr>
                 <tr><td><textarea v-model="experience.tasks" placeholder="Task description" rows="4" cols="50"></textarea></td></tr>
                 <tr><td><button @click.prevent="removeExperience(index)">Remove</button></td></tr>
               </div>
-              <tr><td><button @click.prevent="addExperience">Add Experience</button></td></tr>
-              </tr>   
-              <tr><div v-for="(education, index) in this.educations" :key="index">
+              <tr><td><button @click.prevent="addExperience">Add Experience</button></td></tr> -->
+              <!-- </tr>    -->
+              <!-- <tr> -->
+                <!-- <div v-for="(education, index) in this.educations" :key="index">
                 <tr><td><input type="text" v-model="education.school" placeholder="School" /></td></tr>
                 <tr><td><input type="text" v-model="education.date" placeholder="Date" /></td></tr>
                 <tr><td><input type="text" v-model="education.course" placeholder="Field of Study" /></td></tr>
                 <tr><td><button @click.prevent="removeEducation(index)">Remove</button></td></tr>
               </div>
-              <tr><td><button @click.prevent="addEducation">Add Education</button></td></tr>
-              </tr>
+              <tr><td><button @click.prevent="addEducation">Add Education</button></td></tr> -->
+              <tr>
+                <td><h5>Education</h5></td>
+            </tr>
+              <div  v-for="(education, index) in this.educations" :key="index">
+                <td><input type="text" v-model="education.school" placeholder="School" /></td><br/>
+                <td><input type="text" v-model="education.date" placeholder="Date" /></td><br/>
+                <td><input type="text" v-model="education.course" placeholder="Course" /></td><br/>
+                <td><button @click.prevent="removeEducation(index)">Remove Education</button></td>
+                <td><button @click.prevent="addEducation">Add Education</button></td>  
+            </div> 
+              <!-- </tr> -->
               <!-- <button type="submit" @click.prevent="submitResume">Create Resume</button> -->
             
             
             <tr>
-                <td><h4>Skills</h4></td>
+                <td><h5>Skills</h5></td>
             </tr>
             <tr>
                 <label for="skill">Add skill:</label>
@@ -82,7 +91,6 @@
                   </ul>
                 </tr>
                 <tr>
-                    <td></td>
                     <td>
                         <button type="submit" @click.prevent="updateResume">UPDATE RESUME</button>
                     </td>
@@ -115,7 +123,6 @@
         experiences: [{ title: '', company: '', date: '', description: '' }],
         educations: [{ school: '', date: '', field: '' }],
         skills : [],
-        userId : "1",
         firstName : "",
         lastName : "",
         email : "",
@@ -200,19 +207,36 @@
     padding-bottom: 5rem;
   }
   input{
+    width: 20rem;
     background: none;
     color: #ddd;
+    margin: 0.5rem 0;
     padding: 0.5rem 1rem;
     box-sizing: content-box;
     border-radius: 0.6rem;
     font-size: 1.2rem
   }
-  input[type="submit"]{
-   float: right;
-   font-size: 1rem;
+  button[type="submit"]{
+    margin-top: 2rem;
+    background: linear-gradient(123deg, rgb(189, 115, 42),rgb(219, 70, 40));
   }
-  h4{
+  textarea{
+    background: none;
+    color: #ddd;
+    margin: 0.5rem 0;
+    padding: 0.5rem 1rem;
+    box-sizing: content-box;
+    border-radius: 0.6rem;
+    font-size: 1.2rem
+  }
+  h5{
     margin-top: 2rem
+  }
+  button{
+    padding: 0.4rem;
+    border-radius: 0.5rem;
+    color: #ddd;
+    background: linear-gradient(123deg, rgb(64, 93, 101),rgb(45, 84, 96));
   }
   </style>
   

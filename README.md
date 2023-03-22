@@ -27,3 +27,35 @@ npm run dev
 ```sh
 npm run build
 ```
+
+<!-- To download to a pdf
+npm install --save html2pdf.js
+
+import html2pdf from 'html2pdf.js'
+
+methods: {
+  downloadPDF(sectionElement) {
+    const options = {
+      margin: [0, 0, 0, 0],
+      filename: 'section.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    }
+    
+    html2pdf()
+      .from(sectionElement)
+      .set(options)
+      .save()
+  }
+}
+
+
+<template>
+  <div>
+    <section ref="sectionToDownload">
+      <!-- Content of the section
+    </section>
+    <button @click="downloadPDF($refs.sectionToDownload)">Download PDF</button>
+  </div>
+</template> -->

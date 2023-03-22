@@ -4,41 +4,44 @@
       <div v-if="isLoggedIn">
       <ul class="resumes">
         <li v-for="resume in resumes" :key="resume.id" class="resume">
-          <h4 class="name">{{ resume.firstName }} {{ resume.lastName }}</h4>
+          <h5 class="name">{{ resume.firstName }} {{ resume.lastName }}</h5>
           <div class="address"><span>{{ resume.email }} </span> | <span> {{resume.phone}}</span> | <span>{{resume.address}}</span></div>
           <div class="details-btn">
             <a :href="`/my-resumes/${resume.id}`"><button class="view">View</button></a>
             <button @click="deleteResume(resume.id)" class="delete">Delete</button>
           </div>
           <section>
-            <h6>Personal Summary</h6>
+            <h5>Personal Summary</h5>
             <p>{{resume.intro}}</p>
           </section>
           <section>
-          <h6>Experience</h6>
+          <h5>Experience</h5>
             <div v-for="experience in resume.experience">
-                <div class="date">{{experience.date}}</div>
-                <div class="title">{{experience.title}}</div>
-                <div class="company">{{experience.company}}</div>
-                <div class="tasks">{{experience.tasks}}</div>
+                <div class="date"><em>{{experience.date}}</em></div>
+                <div class="title"><strong>{{experience.title}}</strong></div>
+                <div class="company"><em>{{experience.company}}</em></div>
+                <div class="tasks">{{experience.tasks}}</div><br/>
             </div>
           </section>
         <section>
-          <div>Education</div>
+          <h5>Education</h5>
             <div v-for="education in resume.education">
-                <div>{{education.school}}</div>
-                <div>{{education.date}}</div>
-                <div>{{education.course}}</div>
+                <div><em>{{education.school}}</em></div>
+                <div class="date"><em>{{education.date}}</em></div>
+                <div><strong>{{education.course}}</strong></div><br/>
             </div>
           </section>
+          <section>
+            <h5>Skills</h5>
           <div v-for="skill in resume.skills">
             <div>{{skill}}</div>
           </div>
+          </section>
         </li>
       </ul>
       </div>
       <div v-else>
-        <h4>Please  <router-link to="/sign-up">create an account</router-link> or <router-link to="/sign-in">sign in</router-link> to create a resume</h4>
+        <h5>Please  <router-link to="/sign-up">create an account</router-link> or <router-link to="/sign-in">sign in</router-link> to create a resume</h5>
       </div>
     </main>
   </template>
@@ -98,9 +101,11 @@ import UserResume from '../services/UserResume';
       color: #333
   }
   section{
-    margin: 2rem;
+    display: inline;
     width: calc(60rem - 8rem);
-   
+    margin-top: 0rem;
+    padding-top:2rem;
+    box-sizing: border-box;
   }
     
     .resume {
@@ -112,6 +117,7 @@ import UserResume from '../services/UserResume';
     border: 1px solid #ccc;
     border-radius: 5px;
     margin-bottom: 2rem;
+    font-size: 1rem;
     padding: 2rem;
     color: black;
     background-color: whitesmoke;
@@ -128,13 +134,15 @@ import UserResume from '../services/UserResume';
     .address{
       width: calc(60rem - 4rem);
       text-align: center;
+      height: 2rem;
     }
     .date{
       float: right;
+      font-style: bold;
     }
-    .details-btn a{
-      float:right;
-      color: red
+    .details-btn{
+      height: 1rem;
+      
     }
     
     .delete{
@@ -151,5 +159,5 @@ import UserResume from '../services/UserResume';
       color: #ddd;
       background: linear-gradient(123deg, rgb(64, 93, 101),rgb(45, 84, 96));
     }
-   
+    
 </style>
