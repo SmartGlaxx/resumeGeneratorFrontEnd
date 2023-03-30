@@ -46,16 +46,7 @@
             </div> 
               <tr>
                 <td><h5>Education</h5></td><td></td>
-                </tr>
-              <!-- <tr><div v-for="(education, index) in educations" :key="index">
-                <tr><td><input type="text" v-model="education.school" placeholder="School" /></td></tr>
-                <tr><td><input type="text" v-model="education.date" placeholder="Date" /></td></tr>
-                <tr><td><input type="text" v-model="education.course" placeholder="Field of Study" /></td></tr>
-                <tr><td><button @click.prevent="removeEducation(index)">Remove</button></td></tr>
-              </div>
-              <tr><td><button @click.prevent="addEducation">Add Education</button></td></tr>
-              </tr> -->
-              
+                </tr>              
               <div  v-for="(education, index) in educations" :key="index">
                 <td><input type="text" v-model="education.school" placeholder="School" /></td><br/>
                 <td><input type="text" v-model="education.date" placeholder="Date" /></td><br/>
@@ -87,7 +78,7 @@
       </form>
       </div>
       <div v-else>
-        <h4>Please  <router-link to="/sign-up">create an account</router-link> or <router-link to="/sign-in">sign in</router-link> to create a resume</h4>
+        <h4>Please  create an account or sign in to create a resume</h4>
       </div>
     </main>
   </template>
@@ -182,6 +173,7 @@
 
   <style scoped>
   main{
+    min-height: calc(100vh - 5rem);
     padding: 2rem 4rem;
     height: auto;
     padding-bottom: 5rem;

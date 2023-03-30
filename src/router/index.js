@@ -6,6 +6,7 @@ import CreateResume from '../views/CreateResume.vue'
 import MyResumes from '../views/MyResumes.vue'
 import MyResume from '../views/MyResume.vue'
 import MyResumeEditor from '../views/MyResumeEditor.vue'
+import SearchResumes from '../views/SearchResumes.vue'
 
 
 const router = createRouter({
@@ -64,6 +65,15 @@ const router = createRouter({
       path: '/my-resumes/:resumeId/edit',
       name: 'myResumeEditor',
       component: MyResumeEditor,
+      props: true,
+      meta: {
+        showHeader: true
+      }
+    },
+    {
+      path: '/search-resumes',
+      name: 'searchResumes',
+      component: SearchResumes,
       props: true,
       meta: {
         showHeader: true

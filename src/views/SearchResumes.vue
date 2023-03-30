@@ -1,96 +1,88 @@
 <template>
-    <main >
-      <h1>My Resumes</h1>
-      <div v-if="isLoggedIn">
-      <ul class="resumes">
-        <li v-for="resume in resumes" :key="resume.id" class="resume">
-          <h5 class="name">{{ resume.firstName }} {{ resume.lastName }}</h5>
-          <div class="address"><span>{{ resume.email }} </span> | <span> {{resume.phone}}</span> | <span>{{resume.address}}</span></div>
-          <div class="details-btn">
-            <a :href="`/my-resumes/${resume.id}`"><button class="view">View</button></a>
-            <button @click="deleteResume(resume.id)" class="delete">Delete</button>
-          </div>
-          <section>
+<main>
+    <div v-if="isRecruiterLoggedIn">
+    <input v-model="searchTerm" placeholder="Enter search term">
+    <button @click="searchResumes">Search Resumes</button>
+    <ul class="resumes">
+    <li v-for="resume in resumes" :key="resume.id" class="resume">
+        <h5 class="name">{{ resume.firstName }} {{ resume.lastName }}</h5>
+        <div class="address"><span>{{ resume.email }} </span> | <span> {{resume.phone}}</span> | <span>{{resume.address}}</span></div>
+        <div class="details-btn">
+            <a :href="`/my-resumes/${resume.id}`"><button class="view">View Resume</button></a>
+        </div>
+        <section>
             <h5>Personal Summary</h5>
             <p>{{resume.intro}}</p>
-          </section>
-          <section>
-          <h5>Experience</h5>
+        </section>
+        <section>
+        <h5>Experience</h5>
             <div v-for="experience in resume.experience">
                 <div class="date"><em>{{experience.date}}</em></div>
                 <div class="title"><strong>{{experience.title}}</strong></div>
                 <div class="company"><em>{{experience.company}}</em></div>
                 <div class="tasks">{{experience.tasks}}</div><br/>
             </div>
-          </section>
+        </section>
         <section>
-          <h5>Education</h5>
+        <h5>Education</h5>
             <div v-for="education in resume.education">
                 <div><em>{{education.school}}</em></div>
                 <div class="date"><em>{{education.date}}</em></div>
                 <div><strong>{{education.course}}</strong></div><br/>
             </div>
-          </section>
-          <section>
+        </section>
+        <section>
             <h5>Skills</h5>
-          <div v-for="skill in resume.skills">
+        <div v-for="skill in resume.skills">
             <div>{{skill}}</div>
-          </div>
-          </section>
+        </div>
+        </section>
         </li>
-      </ul>
+    </ul>
+    </div>
+    <div v-else>
+        <h4>Please  create an account or sign in to search for talents</h4>
       </div>
-      <div v-else>
-        <h5>Please  <router-link to="/sign-up">create an account</router-link> or <router-link to="/sign-in">sign in</router-link> to create a resume</h5>
-      </div>
-    </main>
-  </template>
-  
-  <script>
-  import axios from 'axios'
-import UserResume from '../services/UserResume';
-  
-  export default {
-    data() {
-      return {
-        resumes: [],
-        isLoggedIn: false,
-        userEmail: sessionStorage.getItem('userEmail')
-      }
-    },
-    methods:{
-      deleteResume(resumeId) {
-            if (window.confirm("Are you sure you want to delete this resume?")) {
-                UserResume.deleteUserResume(resumeId, this.$router)
-            }
-            // const resumeIndex = this.resumes.findIndex(resume => resume.id === resumeId)
+  </main>
+</template>
 
-            // if (resumeIndex !== -1) {
-            //   this.resumes.splice(resumeIndex, 1)
-            // }
-            window.location.reload()
-        },
-    },
-    mounted() {
-        const resumes = UserResume.getResumes()
-        .then(response =>{
-            this.resumes = response.data
-            console.error("resumes" + resumes)
-        })
-        .catch(error => {
-          console.error(error)
-        })
-    },
-    created(){
-        if (sessionStorage.getItem('userEmail')) {
-        this.isLoggedIn = true;
-        this.userEmail = sessionStorage.getItem('userEmail')
-        }
+<script>
+import axios from 'axios'
+
+export default {
+  data() {
+    return {
+      searchTerm: '',
+      resumes: [],
+      isRecruiterLoggedIn: false,
+      recruiterEmail: sessionStorage.getItem('recruiterEmail'),
     }
-  }
-  </script>
-  
+  },
+  methods: {
+    searchResumes() {
+      axios.get(`http://localhost:8080/resumes/list?task=${this.searchTerm}`)
+      .then(response => {
+        this.resumes = response.data
+      })
+      .catch(error => {
+        console.error(error)
+      })
+    }
+  },
+  created(){
+        if (sessionStorage.getItem('recruiterEmail')) {
+            this.isRecruiterLoggedIn = true;
+            this.recruiterEmail = sessionStorage.getItem('recruiterEmail')
+        }
+    },
+}
+</script>
+
 <style scoped>
+main{
+    min-height: calc(100vh - 5rem);
+    
+}
 .resumes {
     list-style-type: none;
     margin: 4rem;
@@ -110,7 +102,25 @@ import UserResume from '../services/UserResume';
     padding-top:2rem;
     box-sizing: border-box;
   }
-    
+  input{
+    width: calc(100vw - 30rem);
+    background: none;
+    color: #ddd;
+    margin: 0.5rem 4rem;
+    padding: 0.5rem 1rem;
+    box-sizing: content-box;
+    border-radius: 0.6rem;
+    font-size: 1.2rem
+  }
+  button[type="submit"]{
+   margin-top: 2rem;
+  }
+  button{
+    padding: 0.4rem;
+    border-radius: 0.5rem;
+    color: #ddd;
+    background: linear-gradient(123deg, rgb(64, 93, 101),rgb(45, 84, 96));
+  }
     .resume {
     width: 60rem;
     height: 84.2rem;

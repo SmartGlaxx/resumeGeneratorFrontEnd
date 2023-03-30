@@ -21,7 +21,10 @@ const handleStore = useAppStore()
         <li><RouterLink to="/faq" class="link">FAQ</RouterLink></li>
         <li><RouterLink to="/contact" class="link">Contact Us</RouterLink></li>
       </ul>
-      <div class="auth-btn" v-if="isLoggedIn">
+      <div class="auth-btn" v-if="isRecruiterLoggedIn">
+        <li><RouterLink to="/search-resumes" class="link">Search Resumes</RouterLink></li>
+      </div>
+      <div class="auth-btn" v-if="isLoggedIn || isRecruiterLoggedIn">
           <li class="link" @click="signout">Sign out</li>
       </div>
       <div class="auth-btn" v-else>
@@ -30,7 +33,7 @@ const handleStore = useAppStore()
     </div>
     </div>
     <div v-else>
-      ANORTHER HEADER
+      
     </div>
     <div class="mobile-nav">
       <div class="title2">Quick Resume</div>
@@ -58,7 +61,8 @@ import axios from 'axios'
 export default{
   data(){
     return{
-      isLoggedIn: sessionStorage.getItem("isLoggedIn")
+      isLoggedIn: sessionStorage.getItem("isLoggedIn"),
+      isRecruiterLoggedIn :  sessionStorage.getItem("isRecruiterLoggedIn"),
     } 
   },
   methods: {
@@ -68,14 +72,17 @@ export default{
       //   if (response.status == 200) {
           sessionStorage.removeItem('userEmail');
           sessionStorage.removeItem('isLoggedIn');
+          sessionStorage.removeItem('recruiterEmail');
+          sessionStorage.removeItem('isRecruiterLoggedIn');
           this.isLoggedIn = false
+          this.isRecruiterLoggedIn = false
           window.location.reload()
       //   }
       // })
     },  
     reloadPage(){
         this.isLoggedIn = sessionStorage.getItem("isLoggedIn")
-        // window.location.reload()
+        this.isRecruiterLoggedIn = sessionStorage.getItem("isRecruiterLoggedIn")
       }
   },
   mounted(){

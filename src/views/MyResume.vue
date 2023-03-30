@@ -107,12 +107,19 @@ import UserResume from '../services/UserResume';
   }
   </script>
   
-<style>
+<style scoped>
+main{
+  min-height: calc(100vh - 5rem);
+}
+
 .resume {
     list-style-type: none;
     margin: 4rem;
     padding: 0;
     }
+  h1{
+    margin: 1rem 4rem;
+  }
  a{
       text-decoration: none;
       color: #333

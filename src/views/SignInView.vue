@@ -1,12 +1,7 @@
 <template>
     <main>
-      <h2>Sign In</h2>
-      <div v-if="isLoggedIn">
-          Logged in
-      </div>
-      <div v-else>
-        Not logged in
-      </div>
+      <div>
+      <h2>User Sign In</h2>
       <form>
         <table>
             <tr>
@@ -37,6 +32,40 @@
             </tr>
         </table>
       </form>
+      </div>
+      <div>
+        <h2>Recruiter Sign In</h2>
+        <form>
+          <table>
+              <tr>
+                <td>
+                  <label for="email">Email:</label>
+                </td>
+                <td>
+                  <input type="email" id="email" name="email"
+                  v-model="recruiterEmail"
+                  ><br><br>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <label for="password">Password:</label>
+                </td>
+                <td>
+                  <input type="password" id="password" name="password"
+                  v-model="recruiterPassword"
+                  ><br><br>
+                </td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>
+                  <button type="submit" @click.prevent="signinRecruiter">SIGN IN</button>
+                </td>
+              </tr>
+          </table>
+        </form>
+        </div>
     </main>
   </template>
   
@@ -44,6 +73,7 @@
 <script>
 import axios from 'axios';
 import User from '../services/User';
+import Recruiter from '../services/Recruiter';
 
 export default {
   data() {
@@ -52,7 +82,14 @@ export default {
       lastName: "",
       email: "",
       password: "",
-      isLoggedIn: sessionStorage.getItem("isLoggedIn")
+
+      recruiterFirstName: "",
+      recruiterLastName: "",
+      recruiterEmail: "",
+      recruiterPassword: "",
+
+      isLoggedIn: sessionStorage.getItem("isLoggedIn"),
+      isRecruiterLoggedIn: sessionStorage.getItem("isRecruiterLoggedIn")
     };
   },
   methods: {
@@ -63,7 +100,13 @@ export default {
       };
     User.signInNewUser(this.email, this.password, this.$router)
     },
-   
+    signinRecruiter() {
+      const recruiter = {
+        recruiterEmail: this.recruiterEmail,
+        recruiterPassword: this.recruiterPassword,
+      };
+      Recruiter.signInNewRecruiter(this.recruiterEmail, this.recruiterPassword, this.$router)
+    },
   
   },
   // computed: {
@@ -77,6 +120,8 @@ export default {
 
   <style scoped>
   main{
+    display: flex;
+    justify-content: space-around;
     padding: 2rem 4rem;
     height: 100vh;
   }

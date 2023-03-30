@@ -1,6 +1,7 @@
 <template>
-  <main>
-    <h2>Sign Up</h2>
+  <main >
+    <div>
+    <h2>User Sign Up</h2>
     <form>
       <table>
         <tr>
@@ -61,11 +62,78 @@
           </tr>
       </table>
     </form>
+    </div>
+
+    <div>
+      <h2>Recruiter Sign Up</h2>
+      <form>
+        <table>
+          <tr>
+            <td>
+              <label for="firstName">First Name:</label>
+            </td>
+            <td>
+              <input type="text" id="firstName" name="firstName"
+               v-model="recruiterFirstName" required
+              ><br><br>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label for="lastName">Last Name:</label>
+            </td>
+            <td>
+              <input type="text" id="lastName" name="lastName"
+              v-model="recruiterLastName" required
+              ><br><br>
+            </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="email">Email:</label>
+              </td>
+              <td>
+                <input type="email" id="email" name="email"
+                v-model="recruiterEmail" required
+                ><br><br>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="password">Password:</label>
+              </td>
+              <td>
+                <input type="password" id="password" name="password"
+                v-model="recruiterPassword" required
+                ><br><br>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="confirmPassword">Confirm Password:</label>
+              </td>
+              <td>
+                <input type="password" id="confirmPassword" name="confirmPassword"
+                v-model="confirmRecruiterPassword" required
+                ><br><br>
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>
+                <button type="submit" @click.prevent="signupRecruiter">SIGN UP</button>
+              </td>
+            </tr>
+        </table>
+      </form>
+      </div>  
   </main>
 </template>
 
 <style scoped>
 main{
+  display: flex;
+  justify-content: space-around;
   padding: 2rem 4rem;
   height: 100vh;
 }
@@ -86,6 +154,7 @@ input[type="submit"]{
 <script>
 import axios from 'axios';
 import User from '../services/User';
+import Recruiter from '../services/Recruiter';
 export default {
   data() {
     return {
@@ -94,6 +163,12 @@ export default {
       email: "",
       password: "",
       confirmPassword: "",
+
+      recruiterFirstName: "",
+      recruiterLastName: "",
+      recruiterEmail: "",
+      recruiterPassword: "",
+      confirmRecruiterPassword: "",
     };
   },
   methods: {
@@ -109,6 +184,14 @@ export default {
       }
 
       User.signUpNewUser(this.firstName, this.lastName, this.email, this.password)
+    },
+    signupRecruiter() {
+      if (this.password != this.confirmPassword) {
+        alert("Passwords do not match.");
+        return;
+      }
+
+      Recruiter.signUpNewRecruiter(this.recruiterFirstName, this.recruiterLastName, this.recruiterEmail, this.recruiterPassword, this.$router)
     },
   },
 };
