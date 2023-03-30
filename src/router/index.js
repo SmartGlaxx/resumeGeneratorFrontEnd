@@ -7,7 +7,8 @@ import MyResumes from '../views/MyResumes.vue'
 import MyResume from '../views/MyResume.vue'
 import MyResumeEditor from '../views/MyResumeEditor.vue'
 import SearchResumes from '../views/SearchResumes.vue'
-
+import Faq from '../views/Faq.vue'
+import ContactUs from '../views/ContactUs.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -75,6 +76,23 @@ const router = createRouter({
       name: 'searchResumes',
       component: SearchResumes,
       props: true,
+      meta: {
+        showHeader: true
+      }
+    },
+    {
+      path: '/faq',
+      name: 'faq',
+      component: Faq,
+      meta: {
+        showHeader: true
+      }
+    },
+    ,
+    {
+      path: '/contact',
+      name: 'contact',
+      component: ContactUs,
       meta: {
         showHeader: true
       }

@@ -1,6 +1,6 @@
 <template>
     <main >
-      <h1>My Resumes</h1>
+      <h2>My Resumes</h2>
       <div v-if="isLoggedIn">
       <ul class="resumes">
         <li v-for="resume in resumes" :key="resume.id" class="resume">
@@ -91,12 +91,17 @@ import UserResume from '../services/UserResume';
   </script>
   
 <style scoped>
+
+main{
+  margin-top: 4rem;
+  padding-top: 1rem;
+}
 .resumes {
     list-style-type: none;
     margin: 4rem;
     padding: 0;
     }
-  h1{
+  h2{
     margin: 1rem 4rem;
   }
  a{

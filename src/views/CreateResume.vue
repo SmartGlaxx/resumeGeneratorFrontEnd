@@ -177,6 +177,7 @@
     padding: 2rem 4rem;
     height: auto;
     padding-bottom: 5rem;
+    margin-top: 4rem;
   }
   input{
     width: 20rem;

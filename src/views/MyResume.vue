@@ -1,19 +1,17 @@
 <template>
     <main >
-      <h1>My Resume</h1>
+      <h2>My Resume</h2>
       <div v-if="isLoggedIn">
         <div v-if="loading">
-            LOADING
         </div>
         <div v-else>
       <div class="resume">
-        <div class="resume-inner">
-        <!-- <li v-for="resume in resumes" :key="resume.id" class="resume">  -->
+        <div class="resume-inner" ref="sectionToDownload" >
           <h5 class="name">{{ resume.firstName }} {{ resume.lastName }}</h5>
           <div class="address"><span>{{ resume.email }} </span> | <span> {{resume.phone}}</span> | <span>{{resume.address}}</span></div>
           <div class="details-btn">
             <a :href="`/my-resumes/${resume.id}/edit`" class="edit">Edit</a>
-            <!-- <button @click="deleteResume(resumeId)">Delete</button> -->
+            <button @click="downloadPDF($refs.sectionToDownload)" class="download">Download as PDF</button>
           </div>
           <section>
             <h5>Personal Summary</h5>
@@ -42,12 +40,9 @@
               <div>{{skill}}</div>
             </div>
           </section>
-        <!-- </li> -->
         </div> 
       </div>
     </div>
-    
-        
     </div>
       <div v-else>
         <h5>Please  <router-link to="/sign-up">create an account</router-link> or <router-link to="/sign-in">sign in</router-link> to create a resume</h5>
@@ -57,7 +52,8 @@
   
   <script>
   import axios from 'axios'
-import UserResume from '../services/UserResume';
+  import UserResume from '../services/UserResume';
+  import html2pdf from 'html2pdf.js'
   
   export default {
     props: {
@@ -77,14 +73,20 @@ import UserResume from '../services/UserResume';
       }
     },
     methods:{
-        // deleteResume(resumeId) {
-        //     if (window.confirm("Are you sure you want to delete this resume?")) {
-        //         UserResume.deleteUserResume(resumeId, this.$router)
-        //     }
-        //     this.isDataDeleted = true
-        //     this.$router.push('/my-resumes')
-        //     // location.reload()
-        // },
+      downloadPDF(sectionElement) {
+        const options = {
+          margin: [0, 0, 0, 0],
+          filename: 'section.pdf',
+          image: { type: 'jpeg', quality: 0.98 },
+          html2canvas: { scale: 2 },
+          jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        }
+        
+        html2pdf()
+          .from(sectionElement)
+          .set(options)
+          .save()
+      }
     },
    
     mounted() {
@@ -109,6 +111,8 @@ import UserResume from '../services/UserResume';
   
 <style scoped>
 main{
+  margin-top: 4rem;
+  padding-top: 1rem;
   min-height: calc(100vh - 5rem);
 }
 
@@ -117,7 +121,7 @@ main{
     margin: 4rem;
     padding: 0;
     }
-  h1{
+  h2{
     margin: 1rem 4rem;
   }
  a{
@@ -180,8 +184,15 @@ main{
         padding: 0.4rem;
         border-radius: 0.5rem;
         color: #ddd;
-        background: linear-gradient(123deg, rgb(216, 156, 107),rgb(183, 121, 13));
+        background: linear-gradient(123deg, rgb(183, 101, 29),rgb(152, 49, 49));
     }
-    
+    .download{
+      float: left;
+      border: none;
+      padding: 0.4rem;
+      border-radius: 0.5rem;
+      color: #ddd;
+      background: linear-gradient(123deg, rgb(64, 93, 101),rgb(45, 84, 96));
+    }
    
 </style>

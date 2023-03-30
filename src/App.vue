@@ -86,7 +86,15 @@ export default{
       }
   },
   mounted(){
-      this.reloadPage()
+      // this.reloadPage()
+      
+    if (sessionStorage.getItem('hasReloaded') === null) {
+      sessionStorage.setItem('hasReloaded', 'true');
+      location.reload();
+    } else {
+      sessionStorage.removeItem('hasReloaded');
+    }
+  
   },
   computed: {
     showHeader() {
@@ -166,6 +174,10 @@ main{
   color: #fafae4;
 }
 .desktop-nav{
+  top:0;
+  position: fixed;
+  z-index: 10;
+  width: 100vw;
   height: auto;
   background: black;
   display: flex;

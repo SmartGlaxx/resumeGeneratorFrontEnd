@@ -1,7 +1,6 @@
 <template>
     <main>
-      <!-- <h1>Quick Resume</h1> -->
-      <p>Easy resume builder</p>
+      <h2>Easy resume builder</h2>
       <section class="hero">
         <h1>Build the Perfect Resume in Minutes</h1>
         <p>With our easy-to-use online resume builder, you can create a professional resume that stands out and gets you hired.</p>
@@ -111,7 +110,9 @@ import UserResume from "../services/UserResume"
 
 
 <style scoped>
-
+main{
+  margin-top: 4rem;
+}
 
 
 </style>

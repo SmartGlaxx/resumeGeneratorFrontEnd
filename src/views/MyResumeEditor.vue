@@ -202,6 +202,7 @@
 
   <style scoped>
   main{
+    margin-top: 4rem;
     padding: 2rem 4rem;
     height: auto;
     padding-bottom: 5rem;

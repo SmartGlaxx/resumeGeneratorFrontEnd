@@ -81,7 +81,8 @@ export default {
 <style scoped>
 main{
     min-height: calc(100vh - 5rem);
-    
+    margin-top: 4rem;
+    padding-top: 1rem;
 }
 .resumes {
     list-style-type: none;
