@@ -38,6 +38,7 @@
   <style scoped>
   main{
     margin-top: 5rem;
+    min-height: 100vh;
   }
   h2{
     padding: 1rem;

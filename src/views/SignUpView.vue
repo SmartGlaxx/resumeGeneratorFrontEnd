@@ -1,70 +1,6 @@
 <template>
   <main >
     <div>
-    <h2>User Sign Up</h2>
-    <form>
-      <table>
-        <tr>
-          <td>
-            <label for="firstName">First Name:</label>
-          </td>
-          <td>
-            <input type="text" id="firstName" name="firstName"
-             v-model="firstName" required
-            ><br><br>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <label for="lastName">Last Name:</label>
-          </td>
-          <td>
-            <input type="text" id="lastName" name="lastName"
-            v-model="lastName" required
-            ><br><br>
-          </td>
-          </tr>
-          <tr>
-            <td>
-              <label for="email">Email:</label>
-            </td>
-            <td>
-              <input type="email" id="email" name="email"
-              v-model="email" required
-              ><br><br>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <label for="password">Password:</label>
-            </td>
-            <td>
-              <input type="password" id="password" name="password"
-              v-model="password" required
-              ><br><br>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <label for="confirmPassword">Confirm Password:</label>
-            </td>
-            <td>
-              <input type="password" id="confirmPassword" name="confirmPassword"
-              v-model="confirmPassword" required
-              ><br><br>
-            </td>
-          </tr>
-          <tr>
-            <td>Registered? <router-link to="/sign-in" class="sign-in">SIGN IN</router-link></td>
-            <td>
-              <button type="submit" @click.prevent="signup">SIGN UP</button>
-            </td>
-          </tr>
-      </table>
-    </form>
-    </div>
-
-    <div>
       <h2>Recruiter Sign Up</h2>
       <form>
         <table>
@@ -127,6 +63,70 @@
         </table>
       </form>
       </div>  
+      
+      <div>
+        <h2>User Sign Up</h2>
+        <form>
+          <table>
+            <tr>
+              <td>
+                <label for="firstName">First Name:</label>
+              </td>
+              <td>
+                <input type="text" id="firstName" name="firstName"
+                 v-model="firstName" required
+                ><br><br>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="lastName">Last Name:</label>
+              </td>
+              <td>
+                <input type="text" id="lastName" name="lastName"
+                v-model="lastName" required
+                ><br><br>
+              </td>
+              </tr>
+              <tr>
+                <td>
+                  <label for="email">Email:</label>
+                </td>
+                <td>
+                  <input type="email" id="email" name="email"
+                  v-model="email" required
+                  ><br><br>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <label for="password">Password:</label>
+                </td>
+                <td>
+                  <input type="password" id="password" name="password"
+                  v-model="password" required
+                  ><br><br>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <label for="confirmPassword">Confirm Password:</label>
+                </td>
+                <td>
+                  <input type="password" id="confirmPassword" name="confirmPassword"
+                  v-model="confirmPassword" required
+                  ><br><br>
+                </td>
+              </tr>
+              <tr>
+                <td>Registered? <router-link to="/sign-in" class="sign-in">SIGN IN</router-link></td>
+                <td>
+                  <button type="submit" @click.prevent="signup">SIGN UP</button>
+                </td>
+              </tr>
+          </table>
+        </form>
+        </div>
   </main>
 </template>
 

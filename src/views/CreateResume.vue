@@ -63,16 +63,12 @@
                     <td><input type="text" v-model="experience.title" placeholder="Title" /></td><br/>
                     <td><input type="text" v-model="experience.company" placeholder="Company" /></td><br/>
                     <td><input type="text" v-model="experience.date" placeholder="Date" /></td><br/>
-                    <!-- <td><textarea v-model="experience.tasks" placeholder="Task description" rows="4" cols="35"></textarea></td><br/> -->
-                    <h6>Tasks</h6>
+                    <h6>Tasks<button @click.prevent="addTask(experience)">Add Task</button></h6>
                    <div class="task">
                       <div v-for="(task, taskIndex) in experience.tasks" :key="taskIndex">
                         <input type="text" v-model="experience.tasks[taskIndex]" placeholder="Task description" /><br />
                         <button @click.prevent="removeTask(experience, taskIndex)">Remove Task</button>
                       </div>
-                      <br/>
-                      <button @click.prevent="addTask(experience)">Add Task</button>
-                      <br/><br/>
                     </div>
                     <td><button @click.prevent="removeExperience(index)">Remove Experience</button></td>
                     <td><button @click.prevent="addExperience">Add Experience</button></td>  
@@ -111,7 +107,7 @@
       </form>
       </div>
       <div v-else>
-        <h4>Please  create an account or sign in to create a resume</h4>
+        <h5>Please  <router-link to="/sign-up">create an account</router-link> or <router-link to="/sign-in">sign in</router-link> to create a resume</h5>
       </div>
     </main>
   </template>
@@ -120,7 +116,6 @@
   
   <script>
   import UserResume from "../services/UserResume"
-//   import Vue from 'vue';
 
   export default {
     data() {
@@ -197,7 +192,7 @@
 
   <style scoped>
   main{
-    min-height: calc(100vh - 5rem);
+    min-height: 100vh;
     padding: 2rem 4rem;
     height: auto;
     padding-bottom: 5rem;
@@ -206,6 +201,9 @@
     background: linear-gradient(to right, #0f2027, #203a43, #2c5364); 
     color: #fafae4;
   }
+  a{
+    text-decoration: none;
+}
   input{
     width: 20rem;
     background: none;
@@ -296,11 +294,9 @@
     cursor: pointer;
    
   }
-  
   .mobile-nav{
     display: none;
   }
-
   .task{
     margin-left: 2rem;
   }

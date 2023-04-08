@@ -1,18 +1,18 @@
 <template>
   <main >
-    <h2>My Resume</h2>
+    <h2>My Resume <h5><div class="details-btn">
+      <a :href="`/my-resumes/${resume.id}/edit`" class="edit">Edit</a>
+      <button @click="downloadPDF($refs.sectionToDownload)" class="download">Download as PDF</button>
+    </div></h5></h2>
     <div v-if="isLoggedIn">
-      <div v-if="loading">
+      <div v-if="loading" class="loading">
+        Loading...
       </div>
       <div v-else>
     <div class="resume">
       <div class="resume-inner" ref="sectionToDownload" >
         <h5 class="name">{{ resume.firstName }} {{ resume.lastName }}</h5>
         <div class="address"><span>{{ resume.email }} </span> | <span> {{resume.phone}}</span> | <span>{{resume.address}}</span></div>
-        <div class="details-btn">
-          <a :href="`/my-resumes/${resume.id}/edit`" class="edit">Edit</a>
-          <button @click="downloadPDF($refs.sectionToDownload)" class="download">Download as PDF</button>
-        </div>
         <section>
           <h5>Personal Summary</h5>
           <p>{{resume.intro}}</p>
@@ -120,7 +120,7 @@ export default {
 main{
   margin-top: 4rem;
   padding-top: 1rem;
-  min-height: calc(100vh - 5rem);
+  min-height: 230vh;
 }
 
 .resume {
@@ -133,7 +133,6 @@ h2{
 }
 a{
     text-decoration: none;
-    color: #333
 }
 
 section{
@@ -208,6 +207,10 @@ li{
     border-radius: 0.5rem;
     color: #ddd;
     background: linear-gradient(123deg, rgb(64, 93, 101),rgb(45, 84, 96));
+  }
+  .loading{
+    text-align: center;
+    font-size: 2rem;
   }
  
 </style>

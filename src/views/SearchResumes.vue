@@ -30,9 +30,9 @@
     <li v-for="resume in resumes" :key="resume.id" class="resume">
         <h5 class="name">{{ resume.firstName }} {{ resume.lastName }}</h5>
         <div class="address"><span>{{ resume.email }} </span> | <span> {{resume.phone}}</span> | <span>{{resume.address}}</span></div>
-        <div class="details-btn">
+        <!-- <div class="details-btn">
             <a :href="`/my-resumes/${resume.id}`"><button class="view">View Resume</button></a>
-        </div>
+        </div> -->
         <section>
             <h5>Personal Summary</h5>
             <p>{{resume.intro}}</p>
@@ -43,7 +43,10 @@
                 <div class="date"><em>{{experience.date}}</em></div>
                 <div class="title"><strong>{{experience.title}}</strong></div>
                 <div class="company"><em>{{experience.company}}</em></div>
-                <div class="tasks">{{experience.tasks}}</div><br/>
+                Duties: <br/>
+                <ul v-for="task in experience.tasks" class="tasks">
+                  <li>{{ task }}</li>
+                </ul>
             </div>
         </section>
         <section>
@@ -64,7 +67,7 @@
     </ul>
     </div>
     <div v-else>
-        <h4>Please  create an account or sign in to search for talents</h4>
+      <h4>Please  <router-link to="/sign-up">create an account</router-link> or <router-link to="/sign-in">sign in</router-link> to create a resume</h4>
       </div>
   </main>
 </template>
@@ -113,7 +116,10 @@ export default {
 main{
     min-height: 100vh;
     margin-top: 4rem;
-    padding-top: 1rem;
+    padding-top: 3rem;
+}
+a{
+  text-decoration: none;
 }
 .resumes {
     list-style-type: none;
@@ -123,10 +129,7 @@ main{
   h1{
     margin: 1rem 4rem;
   }
- a{
-      text-decoration: none;
-      color: #333
-  }
+
   section{
     display: inline;
     width: calc(60rem - 8rem);

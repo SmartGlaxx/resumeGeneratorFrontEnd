@@ -82,7 +82,6 @@
   </template>
   
   <script>
-  import axios from 'axios'
 import UserResume from '../services/UserResume';
   
   export default {
@@ -146,7 +145,6 @@ main{
   }
  a{
       text-decoration: none;
-      color: #333
   }
   section{
     display: inline;

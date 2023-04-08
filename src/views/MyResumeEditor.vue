@@ -85,7 +85,7 @@
       </div>
     </div>
       <div v-else>
-        <h4>Please  <router-link to="/sign-up">create an account</router-link> or <router-link to="/sign-in">sign in</router-link> to create a resume</h4>
+        <h5>Please  <router-link to="/sign-up">create an account</router-link> or <router-link to="/sign-in">sign in</router-link> to create a resume</h5>
       </div>
     </main>
   </template>
@@ -197,7 +197,11 @@
     padding: 2rem 4rem;
     height: auto;
     padding-bottom: 5rem;
+    min-height: 100vh;
   }
+  a{
+    text-decoration: none;
+}
   input{
     width: 20rem;
     background: none;

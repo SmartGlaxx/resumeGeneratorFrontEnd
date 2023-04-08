@@ -55,14 +55,11 @@
 <script>
  import "../assets/home.css"
  import User from "../services/User";
-import UserResume from "../services/UserResume"
-//  import Resume from "../services/Resume";
 
  export default{
    data(){
     return{
       user : [],
-      userResume: []
     }
    },
    methods:{
@@ -70,16 +67,10 @@ import UserResume from "../services/UserResume"
       User.getUserData().then(response =>{
       this.user = response.data
     })
-    },
-    // getAllResumes(){
-    //   UserResume.getAllResumes().then(response =>{
-    //     this.userResume = response.data
-    //   })
-    // }
+    }
    },
   created(){
     this.getAllUsers();
-    // this.getAllResumes();
   }
  }
 </script>
@@ -88,7 +79,7 @@ import UserResume from "../services/UserResume"
 <style scoped>
 main{
   margin-top: 4rem;
-  
+  min-height: 100vh;
 }
 h3, p{
   text-align:center

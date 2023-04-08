@@ -23,8 +23,8 @@
             answer: "Yes, we take the security of your information very seriously. We use industry-standard encryption and take steps to ensure that your data is protected."
           },
           {
-            question: "Can I customize my resume?",
-            answer: "Yes, you can customize your resume by choosing different templates, fonts, colors, and layouts. You can also edit the content of your resume to highlight your skills and experience."
+            question: "Can I export my resume?",
+            answer: "Yes, you can export your resume as a pdf document by clicking on the 'Download as PDF' button."
           }
         ]
       }
@@ -36,7 +36,7 @@
   main{
     margin-top: 2rem;
     padding: 4rem;
-    min-height: calc(100vh);
+    min-height: 100vh;
   }
   h2 {
     margin-bottom: 2rem;
