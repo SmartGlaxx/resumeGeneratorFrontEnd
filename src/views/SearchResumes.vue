@@ -1,4 +1,27 @@
 <template>
+  <header>
+    <div class="desktop-nav" >
+    <ul >
+      <li class="title1" style="font-size:2rem"><RouterLink to="/" class="link">Quick Resume</RouterLink></li>
+      <div class="auth-btn" v-if="isLoggedIn">
+        <li><RouterLink to="/create-resume" class="link">Create Resume</RouterLink></li>
+        <li><RouterLink to="/my-resumes" class="link">My Resumes</RouterLink></li>
+      </div>
+      <li><RouterLink to="/faq" class="link">FAQ</RouterLink></li>
+      <li><RouterLink to="/contact" class="link">Contact Us</RouterLink></li>
+    </ul>
+    <div class="auth-btn" v-if="isRecruiterLoggedIn">
+      <li><RouterLink to="/search-resumes" class="link">Search Resumes</RouterLink></li>
+    </div>
+    <div class="auth-btn" v-if="isLoggedIn || isRecruiterLoggedIn">
+        <li class="link" @click="signout">Sign out</li>
+    </div>
+    <div class="auth-btn" v-else>
+      <li><RouterLink to="/sign-up" class="link">Sign up</RouterLink></li>
+      <li><RouterLink to="/sign-in" class="link">Sign in</RouterLink></li>
+  </div>
+ </div> 
+</header>
 <main>
     <div v-if="isRecruiterLoggedIn">
     <input v-model="searchTerm" placeholder="Enter search term">
@@ -67,7 +90,15 @@ export default {
       .catch(error => {
         console.error(error)
       })
-    }
+    },
+    signout(){
+            sessionStorage.removeItem('userEmail');
+            sessionStorage.removeItem('isLoggedIn');
+            sessionStorage.removeItem('recruiterEmail');
+            sessionStorage.removeItem('isRecruiterLoggedIn');
+            this.isLoggedIn = false
+            this.isRecruiterLoggedIn = false
+        },
   },
   created(){
         if (sessionStorage.getItem('recruiterEmail')) {
@@ -80,7 +111,7 @@ export default {
 
 <style scoped>
 main{
-    min-height: calc(100vh - 5rem);
+    min-height: 100vh;
     margin-top: 4rem;
     padding-top: 1rem;
 }
@@ -174,5 +205,70 @@ main{
       color: #ddd;
       background: linear-gradient(123deg, rgb(64, 93, 101),rgb(45, 84, 96));
     }
+    
+    
+  .desktop-nav{
+    top:0;
+    position: fixed;
+    z-index: 10;
+    width: 100vw;
+    height: auto;
+    background: black;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .desktop-nav ul{
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    margin: auto 0;
+    justify-content: flex-start;
+  }
+  .desktop-nav li{
+    list-style-type: none;
+    margin: 0 1rem;
+    padding: 1rem;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  .desktop-nav li:hover{
+    color: #203a43;
+  }
+  .link{
+    color: #ddd;
+    text-decoration: none;
+  
+  }
+  .link:hover{
+    color: #203a43;
+  }
+  .auth-btn {
+    margin-right: 4rem;
+    display: flex;
+  }
+  .auth-btn button{
+    background: #203a43;
+    color:#ddd;
+    padding: 0.5rem 1.5rem
+  }
+  .title1{
+    list-style-type: none;
+    margin: 0 1rem;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    color: #ddd;
+    font-size: 2rem;
+    cursor: pointer;
+   
+  }
+  
+  .mobile-nav{
+    display: none;
+  }
+    
     
 </style>

@@ -1,35 +1,11 @@
 <template>
     <main>
-      <h2>Easy resume builder</h2>
+      <h3>An easy resume builder</h3>
       <section class="hero">
         <h1>Build the Perfect Resume in Minutes</h1>
         <p>With our easy-to-use online resume builder, you can create a professional resume that stands out and gets you hired.</p>
-        <a href="#" class="btn">Create Your Resume</a>
+        <a href="/create-resume"><button>Create Your Resume</button></a>
       </section>
-    <table>
-      <tr>
-        <th>
-          fname
-        </th>
-        <th>
-          Experience
-        </th>
-      </tr>
-      <div v-for="res in userResume">
-        <tr>
-          <td>{{ res.userId }}</td>
-          <td>{{ res.firstName }}</td>
-          <td>{{ res.lastName }}</td>
-          <td>{{ res.email }}</td>
-          <td>{{ res.address }}</td>
-          <td>{{ res.phone }}</td>
-          <td>{{ res.experience }}</td>
-          <td>{{ res.education }}</td>
-          <td>{{ res.skills }}</td>
-        </tr>
-      </div>
-  
-    </table>
       <section class="features">
         <h2>Features</h2>
         <ul>
@@ -53,21 +29,21 @@
       </section>
     
       <section class="examples">
-        <h2>Examples</h2>
-        <p>See how others have used our platform to create professional, effective resumes:</p>
+        <h3>Diverse Careers, Same Builder</h3>
+        <p>No matter your career, you can build an effective resume</p>
         <ul>
-          <li><a href="#">Sales Manager</a></li>
-          <li><a href="#">Software Engineer</a></li>
-          <li><a href="#">Marketing Coordinator</a></li>
-          <li><a href="#">Nurse Practitioner</a></li>
-          <li><a href="#">Teacher</a></li>
+          <li>Software Engineer</li>
+          <li>Marketing Coordinator</li>
+          <li>Teacher</li>
+          <li>Nurse Practitioner</li>
+          <li>Sales Manager</li>
         </ul>
       </section>
     
       <section class="cta">
-        <h2>Ready to Build Your Resume?</h2>
+        <h3>Ready to Build Your Resume?</h3>
         <p>Start creating your resume now and land your dream job with ease.</p>
-        <a href="#" class="btn">Create Your Resume</a>
+        <a href="/create-resume"><button class="sec-btn">Create Your Resume</button></a>
       </section>
     </main>
     
@@ -112,6 +88,29 @@ import UserResume from "../services/UserResume"
 <style scoped>
 main{
   margin-top: 4rem;
+  
+}
+h3, p{
+  text-align:center
+}
+li{
+  padding: 1rem;
+  font-size: 1.4rem;
+  color: #ddd;
+}
+footer{
+  padding-bottom: 1.2rem;
+}
+button{
+  padding: 0.4rem;
+  border-radius: 0.5rem;
+  color: #ddd;
+  background: linear-gradient(123deg, rgb(64, 93, 101),rgb(45, 84, 96));
+}
+
+.sec-btn{
+  margin-left: 50%;
+  transform: translateX(-50%);
 }
 
 

@@ -42,7 +42,7 @@ const router = createRouter({
       name: 'createResume',
       component: CreateResume,
       meta: {
-        showHeader: true
+        showHeader: false
       }
     },
     {
@@ -50,7 +50,7 @@ const router = createRouter({
       name: 'myResumes',
       component: MyResumes,
       meta: {
-        showHeader: true
+        showHeader: false
       }
     },
     {
@@ -77,7 +77,7 @@ const router = createRouter({
       component: SearchResumes,
       props: true,
       meta: {
-        showHeader: true
+        showHeader: false
       }
     },
     {

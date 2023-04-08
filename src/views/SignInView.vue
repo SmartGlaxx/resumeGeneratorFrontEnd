@@ -25,7 +25,7 @@
               </td>
             </tr>
             <tr>
-              <td></td>
+              <td>New User? <router-link to="/sign-up" class="sign-up">SIGN UP</router-link></td>
               <td>
                 <button type="submit" @click.prevent="signin">SIGN IN</button>
               </td>
@@ -58,7 +58,7 @@
                 </td>
               </tr>
               <tr>
-                <td></td>
+                <td>New Recruiter? <router-link to="/sign-up" class="sign-up">SIGN UP</router-link></td>
                 <td>
                   <button type="submit" @click.prevent="signinRecruiter">SIGN IN</button>
                 </td>
@@ -136,6 +136,16 @@ export default {
   input[type="submit"]{
    float: right;
    font-size: 1rem;
+  }
+  button{
+    float: right;
+    padding: 0.4rem;
+    border-radius: 0.5rem;
+    color: #ddd;
+    background: linear-gradient(123deg, rgb(64, 93, 101),rgb(45, 84, 96));
+  }
+  .sign-up{
+    text-decoration: none;
   }
   </style>
   

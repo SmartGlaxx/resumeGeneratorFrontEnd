@@ -39,29 +39,18 @@
               <td><input type="text" v-model="experience.title" placeholder="Title" /></td><br/>
               <td><input type="text" v-model="experience.company" placeholder="Company" /></td><br/>
               <td><input type="text" v-model="experience.date" placeholder="Date" /></td><br/>
-              <td><textarea v-model="experience.tasks" placeholder="Task description" rows="4" cols="35"></textarea></td><br/>
+              <h6>Tasks</h6>
+              <div class="task">
+                <div v-for="(task, taskIndex) in experience.tasks" :key="taskIndex">
+                  <input type="text" v-model="experience.tasks[taskIndex]" placeholder="Task description" /><br />
+                  <button @click.prevent="removeTask(experience, taskIndex)">Remove Task</button>
+                </div><br/>
+                <button @click.prevent="addTask(experience)">Add Task</button>
+                <br/><br/>
+              </div>  
               <td><button @click.prevent="removeExperience(index)">Remove Experience</button></td>
               <td><button @click.prevent="addExperience">Add Experience</button></td>  
           </div> 
-
-            <!-- <tr> -->
-              <!-- <div v-for="(experience, index) in this.experiences" :key="index">
-                <tr><td><input type="text" v-model="experience.title" placeholder="Title" /></td></tr>
-                <tr><td><input type="text" v-model="experience.company" placeholder="Company" /></td></tr>
-                <tr><td><input type="text" v-model="experience.date" placeholder="Date" /></td></tr>
-                <tr><td><textarea v-model="experience.tasks" placeholder="Task description" rows="4" cols="50"></textarea></td></tr>
-                <tr><td><button @click.prevent="removeExperience(index)">Remove</button></td></tr>
-              </div>
-              <tr><td><button @click.prevent="addExperience">Add Experience</button></td></tr> -->
-              <!-- </tr>    -->
-              <!-- <tr> -->
-                <!-- <div v-for="(education, index) in this.educations" :key="index">
-                <tr><td><input type="text" v-model="education.school" placeholder="School" /></td></tr>
-                <tr><td><input type="text" v-model="education.date" placeholder="Date" /></td></tr>
-                <tr><td><input type="text" v-model="education.course" placeholder="Field of Study" /></td></tr>
-                <tr><td><button @click.prevent="removeEducation(index)">Remove</button></td></tr>
-              </div>
-              <tr><td><button @click.prevent="addEducation">Add Education</button></td></tr> -->
               <tr>
                 <td><h5>Education</h5></td>
             </tr>
@@ -72,10 +61,6 @@
                 <td><button @click.prevent="removeEducation(index)">Remove Education</button></td>
                 <td><button @click.prevent="addEducation">Add Education</button></td>  
             </div> 
-              <!-- </tr> -->
-              <!-- <button type="submit" @click.prevent="submitResume">Create Resume</button> -->
-            
-            
             <tr>
                 <td><h5>Skills</h5></td>
             </tr>
@@ -120,14 +105,14 @@
     data() {
       return {
         resume: null,
-        experiences: [{ title: '', company: '', date: '', description: '' }],
+        experiences: [{ title: '', company: '', date: '', tasks: [] }],
         educations: [{ school: '', date: '', field: '' }],
         skills : [],
         firstName : "",
         lastName : "",
         email : "",
-        address : " ",
-        phone : " ",
+        address : "",
+        phone : "",
         intro : "",
         experience : "",
         education : "",
@@ -143,7 +128,7 @@
     },
     methods:{
         addExperience() {
-        this.experiences.push({ title: '', company: '', date: '', description: '' })
+        this.experiences.push({ title: '', company: '', date: '', tasks: [] })
         },
         removeExperience(index) {
         this.experiences.splice(index, 1)
@@ -153,6 +138,12 @@
         },
         removeEducation(index) {
         this.educations.splice(index, 1)
+        },
+        addTask(experience) {
+          experience.tasks.push("");
+        },
+        removeTask(experience, index) {
+          experience.tasks.splice(index, 1);
         },
         addSkill() {
             this.skills.push(this.newSkill);
@@ -238,6 +229,9 @@
     border-radius: 0.5rem;
     color: #ddd;
     background: linear-gradient(123deg, rgb(64, 93, 101),rgb(45, 84, 96));
+  }
+  .task{
+    margin-left: 2rem;
   }
   </style>
   

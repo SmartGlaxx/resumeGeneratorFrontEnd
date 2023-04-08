@@ -55,7 +55,7 @@
             </td>
           </tr>
           <tr>
-            <td></td>
+            <td>Registered? <router-link to="/sign-in" class="sign-in">SIGN IN</router-link></td>
             <td>
               <button type="submit" @click.prevent="signup">SIGN UP</button>
             </td>
@@ -119,7 +119,7 @@
               </td>
             </tr>
             <tr>
-              <td></td>
+              <td>Registered? <router-link to="/sign-in" class="sign-in">SIGN IN</router-link></td>
               <td>
                 <button type="submit" @click.prevent="signupRecruiter">SIGN UP</button>
               </td>
@@ -129,27 +129,6 @@
       </div>  
   </main>
 </template>
-
-<style scoped>
-main{
-  display: flex;
-  justify-content: space-around;
-  padding: 2rem 4rem;
-  height: 100vh;
-}
-input{
-  background: none;
-  color: #ddd;
-  padding: 0.5rem 1rem;
-  box-sizing: content-box;
-  border-radius: 0.6rem;
-  font-size: 1.2rem
-}
-input[type="submit"]{
- float: right;
- font-size: 1rem;
-}
-</style>
 
 <script>
 import axios from 'axios';
@@ -197,6 +176,35 @@ export default {
 };
 </script>
 
-
+<style scoped>
+main{
+  display: flex;
+  justify-content: space-around;
+  padding: 2rem 4rem;
+  height: 100vh;
+}
+input{
+  background: none;
+  color: #ddd;
+  padding: 0.5rem 1rem;
+  box-sizing: content-box;
+  border-radius: 0.6rem;
+  font-size: 1.2rem
+}
+input[type="submit"]{
+ float: right;
+ font-size: 1rem;
+}
+button{
+  float: right;
+  padding: 0.4rem;
+  border-radius: 0.5rem;
+  color: #ddd;
+  background: linear-gradient(123deg, rgb(64, 93, 101),rgb(45, 84, 96));
+}
+.sign-in{
+  text-decoration: none;
+}
+</style>
 
 

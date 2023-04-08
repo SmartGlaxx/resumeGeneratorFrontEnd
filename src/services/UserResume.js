@@ -62,6 +62,7 @@ class UserResume{
                 education : education,
                 skills : skills
             }
+            console.log("smart", resume.resumeId)
         return axios.put(`${USER_RESUME_UPDATE_URL}/${resumeId}`, resume)
         .then(response => {
             alert("Resume updated successfully.");
