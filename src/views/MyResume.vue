@@ -1,10 +1,11 @@
 <template>
   <main >
+    <div v-if="isLoggedIn">
     <h2>My Resume <h5><div class="details-btn">
       <a :href="`/my-resumes/${resume.id}/edit`" class="edit">Edit</a>
       <button @click="downloadPDF($refs.sectionToDownload)" class="download">Download as PDF</button>
     </div></h5></h2>
-    <div v-if="isLoggedIn">
+    
       <div v-if="loading" class="loading">
         Loading...
       </div>
@@ -47,7 +48,7 @@
     </div>
   </div>
   </div>
-    <div v-else>
+    <div v-else class="sign-in-prompt">
       <h5>Please  <router-link to="/sign-up">create an account</router-link> or <router-link to="/sign-in">sign in</router-link> to create a resume</h5>
     </div>
   </main>
@@ -211,6 +212,9 @@ li{
   .loading{
     text-align: center;
     font-size: 2rem;
+  }
+  .sign-in-prompt{
+    margin: 4rem
   }
  
 </style>

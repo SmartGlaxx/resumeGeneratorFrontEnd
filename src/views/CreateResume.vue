@@ -57,7 +57,7 @@
                  </td>
             </tr>
             <tr>
-                <td><h5>Work Experince</h5></td><td></td>
+                <td><h5>Work Experience</h5></td><td></td>
             </tr>
             <div  v-for="(experience, index) in experiences" :key="index">
                     <td><input type="text" v-model="experience.title" placeholder="Title" /></td><br/>

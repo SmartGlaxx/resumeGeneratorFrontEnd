@@ -30,9 +30,7 @@
     <li v-for="resume in resumes" :key="resume.id" class="resume">
         <h5 class="name">{{ resume.firstName }} {{ resume.lastName }}</h5>
         <div class="address"><span>{{ resume.email }} </span> | <span> {{resume.phone}}</span> | <span>{{resume.address}}</span></div>
-        <!-- <div class="details-btn">
-            <a :href="`/my-resumes/${resume.id}`"><button class="view">View Resume</button></a>
-        </div> -->
+
         <section>
             <h5>Personal Summary</h5>
             <p>{{resume.intro}}</p>
