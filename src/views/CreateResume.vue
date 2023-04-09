@@ -2,7 +2,7 @@
   <header>
     <div class="desktop-nav" >
     <ul >
-      <li class="title1" style="font-size:2rem"><RouterLink to="/" class="link">Quick Resume</RouterLink></li>
+      <li class="title1" style="font-size:2rem"><RouterLink to="/" class="link">Resume Generator</RouterLink></li>
       <div class="auth-btn" v-if="isLoggedIn">
         <li><RouterLink to="/create-resume" class="link">Create Resume</RouterLink></li>
         <li><RouterLink to="/my-resumes" class="link">My Resumes</RouterLink></li>
